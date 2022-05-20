@@ -1,0 +1,54 @@
+<main>
+  <div class="container">
+    <div class = "main_title">
+      <h2>スケジュール一覧</h2>
+      <%= render "shared/flash" %>
+    </div>
+
+    <table>
+      <div class="schedule_header">
+        <tr>
+          <th>ID</th>
+          <th>タイトル</th>
+          <th>開始日</th>
+          <th>終了日</th>
+          <th>終日</th>
+          <th>スケジュール更新日時</th>
+          <th>確認</th>
+          <th>編集</th>
+          <th>削除</th>
+        </tr>
+      </div>
+      <div class="schedules">
+        <% sc_count = 0 %>
+        <% if @schedules != nil %>
+        <% @schedules.each do |schedule| %>
+          <tr>
+            <td><%= schedule.id%></td>
+            <td><%= schedule.title%></td>
+            <td><%= schedule.start_time.to_s(:datetime_jp)%></td>
+            <td><%= schedule.end_time.to_s(:datetime_jp)%></td>
+            <td>
+              <% if schedule.all_day ==1 %>
+              ○
+              <%else%>
+              ×
+              <%end%>
+            </td>
+            <td><%= schedule.updated_at.to_s(:datetime_jp)%></td>
+            <td><%= link_to "確認", schedule %></td>
+            <td><%= link_to "編集", [:edit, schedule] %></td>
+            <td><%= link_to "削除", schedule_path(schedule), data: { turbo_method: :delete, turbo_confirm:"本当に削除しますか？"}%></td>
+            <% sc_count += 1 %>
+          </tr>
+        <% end %>
+        <%end%>
+      </div>
+    </table>
+
+    <div >
+      <%= link_to "スケジュール新規登録", :new_schedule %>
+    </div>
+    <%= content_for(:footer_count, "スケジュール合計:#{sc_count}") %>
+  </div>
+</main>
