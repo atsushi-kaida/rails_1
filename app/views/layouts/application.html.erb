@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ScheduleApp</title>
+    <title>Rails1</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,6 +11,16 @@
   </head>
 
   <body>
+    <header>
+      <h1>Ruby on Rails スケジュール管理アプリ</h1>
+    </header>
+
     <%= yield %>
+
+    <footer>
+      <div class="time">
+        <h1>現在の日時 : <%= Time.now.strftime("%Y年%m月%d日") %>　　<%= yield(:footer_count) %></h1>
+      </div>
+    </footer>
   </body>
 </html>

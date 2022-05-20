@@ -1,0 +1,47 @@
+<main>
+  <div class="container">
+    <div class = "main_title">
+      <h2>スケジュール一覧</h2>
+    </div>
+    <form>
+      <table >
+        <tr>
+          <th>タイトル</th>
+          <td><%= @schedule.title %></td>
+        </tr>
+        <tr>
+          <th>開始日</th>
+          <td><%= @schedule.start_time.to_s(:datetime_jp)%></td>
+        </tr>
+        <tr>
+          <th>終了日</th>
+          <td><%= @schedule.end_time.to_s(:datetime_jp)%></td>
+        </tr>
+        <tr>
+          <th>終日</th>
+          <td>
+            <% if @schedule.all_day ==1 %>
+              ○
+            <%else%>
+              ×
+            <%end%>
+          </td>
+        </tr>
+        <tr>
+          <th>スケジュールメモ</th>
+          <td><%= @schedule.memo %></td>
+        </tr>
+      </table>
+
+      <div>
+        <%= link_to "スケジュール一覧に戻る", :schedules %>
+      </div>
+      <div>
+        <%= link_to "スケジュールを編集する", [:edit, @schedule]%>
+      </div>
+      <div>
+        <%= link_to "スケジュールを削除", schedule_path(@schedule), data: { turbo_method: :delete, turbo_confirm:"本当に削除しますか？"}%>
+      </div>
+    </form>
+  </div>
+</main>
